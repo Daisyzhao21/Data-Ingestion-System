@@ -1,5 +1,7 @@
 # ChatGPT Mobile App Reviews - Exploratory Data Analysis
 
+
+
 ## 📁 Dataset Information
 Original Dataset
 Records: 20,000 reviews
@@ -12,7 +14,13 @@ Records: 20,000 reviews
 Features: 8 columns (after cleaning)
 Memory Usage: 1.2+ MB
 
+
+
+
 ## 🧹 Data Preprocessing
+
+
+
 ### Columns Removed
 userImage: User avatar URLs (no analytical value)
 replyContent: 0 non-null values (completely missing)
@@ -31,6 +39,9 @@ appVersion: App version information
 ### Missing Value Treatment
 reviewCreatedVersion & appVersion: Filled 1,450 missing values (7.25%) with "unknown"
 
+
+
+
 ## 🔍 Key Findings
 Score	Count	Percentage
 5 ⭐	15,163	75.8%
@@ -39,6 +50,9 @@ Score	Count	Percentage
 2 ⭐	429	2.1%
 1 ⭐	1,587	7.9%
 
+
+
+
 Overall Statistics:
 Average Rating: 4.43/5.00
 Standard Deviation: 1.19
@@ -46,9 +60,15 @@ Positive Reviews (4-5 stars): 85.4%
 Negative Reviews (1-2 stars): 10.1%
 NPS-like Score: +65.7%
 
+
+
+
 Version Performance Analysis
 Version Data Quality
 Total Versions: 54
+
+
+
 
 Reliable Versions (≥5 reviews): 24 (44.4%)
 Small Sample Versions (<5 reviews): 30 (55.6%)
@@ -58,6 +78,10 @@ Top Performing Versions (Minimum 5 Reviews)
 1.2025.147: 4.62 (13 reviews)
 1.2025.210: 4.60 (133 reviews)
 1.2025.217: 4.54 (293 reviews)
+
+
+
+
 
 Key Insights:
 
@@ -75,6 +99,11 @@ Content Length: Negative reviews tend to be longer (users provide detailed expla
 Language Diversity: Multiple languages present in reviews
 Usefulness: Low correlation between score and thumbs-up count
 
+
+
+
+
+
 ## 📈 Business Insights
 Strengths
 High User Satisfaction: 85.4% positive ratings indicate excellent product-market fit
@@ -85,6 +114,10 @@ Areas for Attention
 Class Imbalance: Severe skew toward positive reviews may challenge sentiment analysis models
 Limited Time Range: 5-day data window restricts trend analysis
 Version Sample Sizes: 55.6% of versions have insufficient reviews for reliable analysis
+
+
+
+
 
 🛠 Technical Recommendations
 Data Collection Improvements
