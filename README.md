@@ -1,4 +1,4 @@
-# Data IngestionSystem
+# Data Ingestion System
 ChatGPT—Google-Play-Reviews-Analysis
 
 ### 📋 Project Overview
