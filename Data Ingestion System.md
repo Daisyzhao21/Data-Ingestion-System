@@ -1,120 +1,100 @@
-# Data Ingestion System
-ChatGPT—Google-Play-Reviews-Analysis
+# ChatGPT Google Play Reviews Analysis
 
-### 📋 Project Overview
+## 📋 Project Overview
 
-This project implements a complete data pipeline for collecting, analyzing, and managing user review data for the official ChatGPT Android application on Google Play Store.
+A comprehensive data pipeline for collecting, analyzing, and managing user reviews of the ChatGPT Android app from Google Play Store. The system handles everything from data ingestion to automated storage and insightful analysis.
 
-### 🎯 Objectives
-Collect large-scale user review data from Google Play Store
+## 🎯 Key Objectives
 
-Perform exploratory data analysis on review patterns and ratings
+- **Collect** 20,000 user reviews from Google Play Store
+- **Analyze** rating patterns, user sentiment, and version performance  
+- **Automate** data pipeline with GitHub integration
+- **Establish** foundation for continuous monitoring
 
-Establish an automated data ingestion pipeline to GitHub
+## 🛠️ Technical Implementation
 
-Create a foundation for ongoing monitoring of user sentiment
+### Data Pipeline
+- **Collection**: `google-play-scraper` package (20K reviews, English, US region)
+- **Cleaning**: Removed 3 unnecessary columns (userImage, replyContent, repliedAt), handled missing values in version columns (7.25% filled with 'unknown')
+- **Storage**: SQLite3 database with optimized schema and indexes
+- **Analysis**: Rating distribution, version performance, temporal patterns
 
-### 🛠️ Technical Implementation
-Data Collection
-Tool Used: google-play-scraper Python package
+### Database Architecture
+**SQLite3 Database**: `chatgpt_reviews.db`
+- **Table**: `reviews` with 8 core columns including reviewId, userName, content, score, thumbsUpCount, reviewCreatedVersion, at, appVersion
+- **Performance**: Indexed on score, appVersion, and thumbsUpCount for fast querying
+- **Integrity**: Primary key constraints and data type validation
+- **Management**: Automated backup system and size monitoring
 
-Data Volume: 20,000 most recent user reviews
+### Core Features
+- Automated data ingestion and validation
+- Version performance tracking across 54 app versions
+- Temporal analysis and user behavior insights
+- Secure GitHub integration with PAT authentication
+- Efficient SQL querying for complex analysis
 
-Parameters:
+## 📊 Key Insights
 
-App ID: com.openai.chatgpt
+### Rating Distribution
+- **75.8% Positive** (5 stars) - 15,163 reviews
+- **9.6% Positive** (4 stars) - 1,926 reviews
+- **4.5% Neutral** (3 stars) - 895 reviews
+- **2.1% Negative** (2 stars) - 429 reviews
+- **7.9% Negative** (1 star) - 1,587 reviews
 
-Language: English (en)
+### Overall Performance Metrics
+- **Average Rating**: 4.43/5.00
+- **Standard Deviation**: 1.19
+- **Positive Reviews** (4-5 stars): 85.4%
+- **Negative Reviews** (1-2 stars): 10.1%
+- **NPS-like Score**: +65.7%
 
-Region: United States (us)
+### Version Performance
+**Total Versions Analyzed**: 54
+- **Reliable Versions** (≥5 reviews): 24 (44.4%)
+- **Small Sample Versions** (<5 reviews): 30 (55.6%)
 
-Sorting: Newest first
+**Top 3 Versions** (min. 5 reviews):
+1. 1.2025.161 → 4.82 ⭐ (11 reviews)
+2. 1.2025.084 → 4.80 ⭐ (10 reviews) 
+3. 1.2025.147 → 4.62 ⭐ (13 reviews)
 
-Data Analysis
-Rating Distribution: Analysis of star rating patterns and skewness
+**Most Reviewed Version**: 1.2025.245 (12,069 reviews, 4.34 score)
 
-Review Length: Examination of relationship between review length and ratings
+### User Behavior Patterns
+- **Review Polarization**: Strong tendency toward 5-star or 1-star ratings
+- **Detailed Feedback**: Negative reviews tend to be longer and more explanatory
+- **Global Reach**: Multi-lingual user base with diverse feedback
+- **Temporal Pattern**: Highest average ratings at 20:00 (4.51)
 
-Temporal Analysis: Review frequency and patterns over time
+### Version Evolution
+- **Trend**: Slight improvement over time (slope: 0.0047)
+- **Correlation**: No significant correlation between sample size and rating (0.118)
+- **Consistency**: Ratings are relatively stable across versions
 
-Metadata Validation: Verification of timestamp, user information, and rating completeness
+## 🚀 Quick Start
 
-Data Storage & Automation
-Local Storage: CSV format (chatgpt_reviews.csv)
+### Installation & Setup
+Install required packages and run the database setup script. The system automatically creates the SQLite3 database with optimized schema and imports your review data.
 
-Cloud Backup: Automated pipeline to GitHub repository
+### Database Features
+- **Fast Querying**: Pre-built indexes enable rapid analysis
+- **Data Integrity**: Constraint validation ensures clean data
+- **Easy Backup**: Automated timestamped backups
+- **Flexible Analysis**: Support for complex SQL queries
 
-Version Control: Integrated with Daisyzhao21/Data-Ingestion-System repository
+## 📈 Future Roadmap
 
-Access Management: Configured GitHub Personal Access Token (PAT) for secure automation
+- **Extended Analysis**: Longer time periods for trend identification
+- **Advanced Analytics**: Sentiment analysis and topic modeling
+- **Interactive Dashboard**: Real-time visualization platform
+- **Multi-Platform**: Expand to iOS App Store and other regions
 
-### 📊 Key Findings
-Rating Distribution
-5-star ratings: 75.92% (15,184 reviews)
+## 🔗 Resources
 
-4-star ratings: 9.64% (1,928 reviews)
+- **GitHub**: [Data Ingestion System](https://github.com/Daisyzhao21/Data-Ingestion-System)
+- **Maintainer**: Daisyzhao21
+- **License**: MIT
 
-3-star ratings: 4.47% (894 reviews)
-
-2-star ratings: 2.10% (419 reviews)
-
-1-star ratings: 7.88% (1,575 reviews)
-
-### Insights
-Significant polarization in user sentiment (mostly 5-star or 1-star reviews)
-
-Lower-rated reviews tend to be more detailed and explanatory
-
-Consistent daily review volume indicates active user base
-
-High-quality metadata enables robust analysis capabilities
-
-### 🚀 Technical Achievements
-End-to-End Pipeline: Established complete data flow from collection to storage
-
-Automation Framework: Implemented GitHub API integration for automated updates
-
-Analysis Foundation: Created comprehensive exploratory data analysis framework
-
-Scalable Architecture: Designed system that can be extended to other applications
-
-### 🔧 Installation & Usage
-Prerequisites
-bash
-pip install google-play-scraper pandas matplotlib seaborn PyGithub
-Basic Usage
-python
-from google_play_scraper import app, reviews, Sort
-
-# Get app info
-app_info = app('com.openai.chatgpt', lang='en', country='us')
-
-# Scrape reviews
-reviews_result, _ = reviews(
-    'com.openai.chatgpt',
-    lang='en',
-    country='us',
-    sort=Sort.NEWEST,
-    count=1000
-)
-### 📈 Future Enhancements
-Scheduled Collection: Implement regular automated data collection
-
-Advanced Analytics: Incorporate sentiment analysis and topic modeling
-
-Dashboard Development: Create interactive visualization dashboard
-
-Multi-Platform Expansion: Extend to other app stores and platforms
-
-Alert System: Implement notification system for rating changes or trends
-
-### 📝 License
-This project is open source and available under the MIT License.
-
-#### 🤝 Contributing
-Contributions, issues, and feature requests are welcome. Feel free to check issues page.
-
-#### 📧 Contact
-Daisyzhao21 - GitHub Profile
-
-#### Project Link: https://github.com/Daisyzhao21/Data-Ingestion-System
+*Data Source: Google Play Store ChatGPT Reviews | Last Updated: September 2025*  
+*Database: SQLite3 with 20,000+ optimized records*
